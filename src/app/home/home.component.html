@@ -1,0 +1,47 @@
+<!-- Topbar -->
+<header class="bg-white shadow p-4 flex justify-between items-center">
+  <div class="text-xl font-bold">📝 CollabEdit</div>
+  <div class="flex items-center gap-4">
+    <span class="text-gray-600">👤 {{ currentUser }}</span>
+    <button (click)="copyShareLink()" class="bg-blue-600 text-white px-4 py-2 rounded">Share</button>
+  </div>
+</header>
+
+<!-- Main Editor Area -->
+<div class="flex flex-1 overflow-hidden h-[calc(100vh-80px)]">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white p-4 shadow-lg overflow-y-auto">
+    <h2 class="text-lg font-semibold mb-4">Collaborators</h2>
+    <ul class="space-y-2">
+        <li *ngFor="let name of collaborators" class="flex items-center gap-2 text-green-600 font-medium">
+            🟢 {{ name }}
+        </li>
+    </ul>
+
+
+    <h2 class="text-lg font-semibold mt-8 mb-4">Comments</h2>
+    <div class="space-y-2 text-sm">
+      <div class="bg-gray-100 p-2 rounded">
+        <strong>Alice:</strong> Consider simplifying this sentence.
+      </div>
+      <div class="bg-gray-100 p-2 rounded">
+        <strong>Bob:</strong> Looks good to me!
+      </div>
+    </div>
+    <div class="mt-4">
+        <input [(ngModel)]="newComment" class="w-full p-2 border rounded" placeholder="Add a comment..." />
+        <button (click)="sendComment()" class="mt-2 bg-green-500 text-white px-4 py-1 rounded">Post</button>
+    </div>
+
+  </aside>
+
+  <!-- Editor -->
+  <main class="flex-1 p-6 overflow-y-auto">
+    <textarea
+      [(ngModel)]="editorContent"
+      (input)="onContentChange()"
+      class="w-full h-full p-4 text-lg border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+      placeholder="Start writing your document here..."
+    ></textarea>
+  </main>
+</div>
