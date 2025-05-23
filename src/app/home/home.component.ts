@@ -174,11 +174,15 @@ isMobileChatOpen: boolean = false;
 
   copyShareLink(): void {
     if (!this.isUsernameConfirmed) return;
-    const shareUrl = `${window.location.origin}/editor/${this.documentId}`;
+
+    const basePath = window.location.pathname.split('/editor')[0];
+    const shareUrl = `${window.location.origin}${basePath}/editor/${this.documentId}`;
+
     navigator.clipboard.writeText(shareUrl)
       .then(() => alert('Link copied to clipboard!'))
       .catch(err => console.error('Failed to copy link: ', err));
   }
+
 
   formatTimestamp(timestamp: number | undefined): string {
     if (!timestamp) return '';
