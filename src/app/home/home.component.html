@@ -95,6 +95,11 @@
     </div>
   </div>
 
+  <!-- Comment input -->
+  <div class="mt-auto pt-3 border-t border-gray-200">
+    <textarea [(ngModel)]="newCommentText" rows="3" class="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed" placeholder="Add a comment..." [disabled]="!isUsernameConfirmed" aria-label="New Comment"></textarea>
+    <button (click)="sendComment()" class="mt-2 w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700 disabled:opacity-60 disabled:bg-green-400 shadow-sm" [disabled]="!isUsernameConfirmed || !newCommentText.trim()">Post Comment</button>
+  </div>
 </aside>
 
 
