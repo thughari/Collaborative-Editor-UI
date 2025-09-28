@@ -21,9 +21,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install angular-cli-ghpages
-        run: npx ng add angular-cli-ghpages --skip-confirmation
-
       - name: Deploy to GitHub Pages
         run: npx ng deploy --base-href=/Collaborative-Editor-UI/ --no-silent --c=production --skip-build=false
         env:
