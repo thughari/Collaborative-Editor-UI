@@ -1,35 +1,32 @@
-name: Deploy Angular app to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main  # Run workflow only when pushing to main branch
+    branches: [ main ]
+
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout repo
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      # Setup Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
-          node-version: '18'   # or the version you use
+          node-version: '18'
 
-      # Install dependencies & build Angular
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build Angular app
-        run: npm run build -- --configuration production --base-href "https://thughari.github.io/Collaborative-Editor-UI/"
+      - name: Build
+        run: npm run build
 
-      # Deploy dist folder to gh-pages branch
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages     # target branch
-          folder: dist/collaborative-editor-ui/browser   # 👈 adjust if Angular project name is different
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/collaborative-editor/browser
+          enable_jekyll: false
