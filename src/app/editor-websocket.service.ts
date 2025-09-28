@@ -18,8 +18,9 @@ export class EditorWebSocketService {
     onMessageCallback: (message: WebSocketMessage) => void
   ): void {
     this.documentId = docId; // Store for later use
-    this.ws = new WebSocket(`wss://collabeditor-bsua.onrender.com/ws/editor/${docId}`); //use ws://localhost:8080/ws/editor/${docId} for local testing
-
+    this.ws = new WebSocket(`wss://collabeditor-j1zq.onrender.com/ws/editor/${docId}`); //use ws://localhost:8080/ws/editor/${docId} for local testing
+    //collabeditor-bsua.onrender.com - haribabutatikonda3
+    //collabeditor-j1zq.onrender.com - thughari3
     this.ws.onopen = () => {
       console.log('[WebSocket] Connected');
       this.sendPayload({
