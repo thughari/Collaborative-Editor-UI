@@ -21,12 +21,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build --configuration production --base-href /Collaborative-Editor-UI/
+      - name: Install angular-cli-ghpages
+        run: npx ng add angular-cli-ghpages --skip-confirmation
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/collaborative-editor/browser
-          enable_jekyll: false
+      - name: Deploy to GitHub Pages
+        run: npx ng deploy --base-href=/Collaborative-Editor-UI/ --no-silent --c=production --skip-build=false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
